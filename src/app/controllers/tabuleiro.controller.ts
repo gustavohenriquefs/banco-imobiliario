@@ -5,6 +5,8 @@ import { Empresa } from '../models/empresa';
 import { Jogador } from '../models/jogador';
 import { Tabuleiro } from '../models/tabuleiro';
 import { LugarEspecial } from '../models/lugar-especial';
+import { IIterator } from "../iterator/iterator.interface";
+
 
 export enum EventoMoverCasa {
   ComprarImovel = "Comprar Imóvel",
@@ -71,8 +73,18 @@ export class TabuleiroController {
     }
 
   }
+  public listarPropriedades(): void {
+    const iterator: IIterator<Propriedade> = this.tabuleiro.getIterator();
+    while (iterator.hasNext()) {
+      const propriedade = iterator.next();
+      console.log(`Propriedade: ${propriedade.nome}, Preço: R$${propriedade.preco}`);
+    }
+  }
 
   public getPropriedades(): Propriedade[] {
     return this.tabuleiro.getPropriedades();
+  }
+  public getIterator(): IIterator<Propriedade> {
+    return this.tabuleiro.getIterator();
   }
 }

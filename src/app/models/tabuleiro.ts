@@ -4,6 +4,9 @@ import { Empresa } from "./empresa";
 import { Imovel } from "./imovel";
 import { Propriedade } from "./propriedade";
 import { TipoLogradouro } from "./tipo-logradouro";
+import { TabuleiroIterator } from "../iterator/tabuleiro-iterator";
+import { IIterator } from "../iterator/iterator.interface";
+
 
 export class Tabuleiro {
   private _propriedades: Propriedade[] = [];
@@ -44,5 +47,8 @@ export class Tabuleiro {
 
   public getQuantidadePropriedades(): number {
     return this._propriedades.length;
+  }
+  public getIterator(): IIterator<Propriedade> {
+    return new TabuleiroIterator(this._propriedades);
   }
 }

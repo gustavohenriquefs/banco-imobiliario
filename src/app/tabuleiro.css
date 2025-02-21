@@ -1,0 +1,391 @@
+/* tabuleiro.css */
+:root {
+  --color-primary: #2563eb;
+  --color-secondary: #dbeafe;
+  --color-success: #059669;
+  --color-danger: #dc2626;
+  --color-warning: #f59e0b;
+  --color-player1: #3b82f6;
+  --color-player2: #ef4444;
+  --color-imovel: #134e4a;
+  --color-empresa: #854d0e;
+  --color-especial: #4f46e5;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.app-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.game-header {
+  text-align: center;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.game-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Setup Screen */
+.setup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
+.setup-card {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 500px;
+}
+
+.setup-card h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input-field:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all 0.2s;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  width: 100%;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-primary:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+/* Game Layout */
+.game-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.player-card {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1.25rem;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.player-card.active-player {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.player-card:nth-child(1) {
+  border-left: 4px solid var(--color-player1);
+}
+
+.player-card:nth-child(1).active-player {
+  border: 2px solid var(--color-player1);
+  border-left: 4px solid var(--color-player1);
+}
+
+.player-card:nth-child(2) {
+  border-left: 4px solid var(--color-player2);
+}
+
+.player-card:nth-child(2).active-player {
+  border: 2px solid var(--color-player2);
+  border-left: 4px solid var(--color-player2);
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.player-header h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.player-token {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.player1-token {
+  background-color: var(--color-player1);
+}
+
+.player2-token {
+  background-color: var(--color-player2);
+}
+
+.player-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.saldo-display, .posicao-display {
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.saldo-value {
+  font-weight: 600;
+  color: var(--color-success);
+  font-size: 1.25rem;
+}
+
+.propriedades-section h4 {
+  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  color: #4b5563;
+}
+
+.no-properties {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: var(--radius-sm);
+}
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.mini-property {
+  padding: 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: space-between;
+  overflow: hidden;
+  position: relative;
+}
+
+.mini-property.cartaImovel {
+  background-color: #d1fae5;
+  border: 1px solid #10b981;
+}
+
+.mini-property.cartaEmpresa {
+  background-color: #fef3c7;
+  border: 1px solid #f59e0b;
+}
+
+.mini-property.cartaEspecial {
+  background-color: #e0e7ff;
+  border: 1px solid #6366f1;
+}
+
+.mini-property-name {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-property-price {
+  font-size: 0.7rem;
+  color: #374151;
+}
+
+.historico-section {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 1rem;
+}
+
+/* ============================
+   Estilização do Tabuleiro
+   ============================ */
+   .tabuleiro {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: var(--radius-md);
+  }
+  
+  /* Cada propriedade no tabuleiro */
+  .propriedade {
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .propriedade:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Cabeçalho da propriedade */
+  .propriedade-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .propriedade-posicao {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+  
+  .propriedade-nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0.25rem 0;
+  }
+  
+  /* Detalhes da propriedade */
+  .propriedade-detalhes {
+    font-size: 0.85rem;
+    color: #374151;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .propriedade-preco {
+    font-weight: 600;
+    color: var(--color-warning);
+  }
+  
+  .propriedade-aluguel {
+    font-size: 0.8rem;
+    color: var(--color-success);
+  }
+  
+  .propriedade-status {
+    font-style: italic;
+    color: #6b7280;
+  }
+  
+  /* Indicadores dos jogadores presentes na casa */
+  .jogadores-presentes {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .jogador-token {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+  }
+  
+  .token-1 {
+    background-color: var(--color-player1);
+  }
+  
+  .token-2 {
+    background-color: var(--color-player2);
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .tabuleiro {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+  

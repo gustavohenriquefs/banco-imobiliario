@@ -21,6 +21,7 @@ export class Empresa extends Propriedade implements ISujeitoObservavel {
   }
 
   adicionarObservador(observador: Observador): void {
+    if(observador == this.dono){return;}
     this.observadores.push(observador);
 
     console.log("jogador " + observador + " foi adicionado na lista de observadores");

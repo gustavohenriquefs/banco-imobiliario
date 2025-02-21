@@ -4,7 +4,6 @@ import { Empresa } from "./empresa";
 import { Imovel } from "./imovel";
 import { Propriedade } from "./propriedade";
 
-
 export class Tabuleiro {
   private _propriedades: Propriedade[] = [];
   private _lugarEspecialFactory: ILugarEspecialFactory;

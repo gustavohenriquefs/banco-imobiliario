@@ -1,18 +1,29 @@
-import { NomesLugaresEspeciais } from "../efeitos/lugar-especial.factory";
+import { LugarEspecialFactory, NomesLugaresEspeciais } from "../efeitos/lugar-especial.factory";
 import { ILugarEspecialFactory } from "../efeitos/lugar-especial.factory.interface";
 import { Empresa } from "./empresa";
 import { Imovel } from "./imovel";
 import { Propriedade } from "./propriedade";
 
+
 export class Tabuleiro {
   private _propriedades: Propriedade[] = [];
   private _lugarEspecialFactory: ILugarEspecialFactory;
+  private _inicializado: boolean = false;
+  private static instance: Tabuleiro;
 
-  constructor(lugarEspecialFactory: ILugarEspecialFactory) {
-    this._lugarEspecialFactory = lugarEspecialFactory;
+  private constructor() {
+    this._lugarEspecialFactory = new LugarEspecialFactory();
+  }
+
+  public static getInstance(): Tabuleiro {
+    if (!Tabuleiro.instance) {
+      Tabuleiro.instance = new Tabuleiro();
+    }
+    return Tabuleiro.instance;
   }
 
   public iniciarTabuleiro(): void {
+    if (this._inicializado) return;
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.PARTIDA
     ));
@@ -76,8 +87,9 @@ export class Tabuleiro {
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.AVANCE_PARA_PARTIDA
     ));
-
+  
     this._propriedades.push(new Imovel("Rua do Comércio", 500, null, 125));
+    this._inicializado = true;
   }
 
   public getPropriedades(): Propriedade[] {

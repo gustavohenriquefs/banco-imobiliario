@@ -1,9 +1,11 @@
 import { Propriedade } from "../models/propriedade";
-import { LugarEspecialFactory } from "../efeitos/lugar-especial.factory";
-import { Imovel } from "../models/imovel";
-import { Empresa } from "../models/empresa";
-import { Jogador } from "../models/jogador";
-import { Tabuleiro } from "../models/tabuleiro";
+import { Imovel } from '../models/imovel';
+import { Empresa } from '../models/empresa';
+import { Jogador } from '../models/jogador';
+import { Tabuleiro } from '../models/tabuleiro';
+import { LugarEspecial } from '../models/lugar-especial';
+
+
 
 export enum EventoMoverCasa {
   ComprarImovel = "Comprar Imóvel",
@@ -20,7 +22,7 @@ export class TabuleiroController {
   private jogador2!: Jogador;
 
   constructor() {
-    this.tabuleiro = new Tabuleiro(new LugarEspecialFactory());
+    this.tabuleiro = Tabuleiro.getInstance();
     this.tabuleiro.iniciarTabuleiro();
   }
 

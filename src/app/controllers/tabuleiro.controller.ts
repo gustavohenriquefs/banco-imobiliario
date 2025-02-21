@@ -10,21 +10,16 @@ import { LugarEspecial } from '../models/lugar-especial';
 export enum EventoMoverCasa {
   ComprarImovel = "Comprar Imóvel",
   PagarAluguel = "Pagar Aluguel",
-  PagarImposto = "Pagar Imposto",
-  Prisao = "Vá para a Prisão",
-  Partida = "Ponto de Partida",
   ComprarEmpresa = "Comprar Empresa",
+  AcaoEspecial = "Ação Especial",
   PagarEmpresa = "Pagar Empresa",
 }
 
 export class TabuleiroController {
   private tabuleiro: Tabuleiro;
 
-  private jogador1: Jogador = null;
-  private jogador2: Jogador = null;
-
-  private turnoAtual: number = 1;
-  private jogoAtivo: boolean = true;
+  private jogador1!: Jogador;
+  private jogador2!: Jogador;
 
   constructor() {
     this.tabuleiro = Tabuleiro.getInstance();
@@ -36,41 +31,92 @@ export class TabuleiroController {
     this.jogador2 = new Jogador(jogador2);
   }
 
-  // TODO: aqui mesmo?
-  public moverJogador(jogador: Jogador, posicao: number): EventoMoverCasa {
-    jogador.mover(posicao, this.tabuleiro.getQuantidadePropriedades());
-
-    const casaAtual = this.tabuleiro.getPropriedade(jogador.posicao);
-
-    if (casaAtual instanceof Imovel) {
-      if (casaAtual.getDono() === null) {
-        console.log(`🏠 ${jogador.nome} caiu em ${casaAtual.nome} e pode comprar por R$${casaAtual.preco}`);
-        return EventoMoverCasa.ComprarImovel;
-      } else {
-        console.log(`🏠 ${jogador.nome} caiu em ${casaAtual.nome} e deve pagar R$${casaAtual.calcularAluguel()}`);
-        return EventoMoverCasa.PagarAluguel;
-      }
-    } else if (casaAtual instanceof Empresa) {
-      const empresa: Empresa = casaAtual as Empresa;
-
-      if (empresa.dono === null) {
-        console.log(`🏢 ${jogador.nome} caiu em ${casaAtual.nome} e pode comprar por R$${casaAtual.preco}`);
-        return EventoMoverCasa.ComprarEmpresa;
-      } else {
-        console.log(`🏢 ${jogador.nome} caiu em ${casaAtual.nome} e deve pagar R$${casaAtual.calcularAluguel()}`);
-        return EventoMoverCasa.PagarEmpresa;
-      }
-    } else {
-      const lugarEspecial: LugarEspecial = casaAtual as LugarEspecial;
-
-      lugarEspecial.ativarEfeito(jogador);
-
-      return EventoMoverCasa.PagarImposto;
-    }
-
+  public getJogadores(): { jogador1: Jogador; jogador2: Jogador } {
+    return { jogador1: this.jogador1, jogador2: this.jogador2 };
   }
 
   public getPropriedades(): Propriedade[] {
     return this.tabuleiro.getPropriedades();
   }
+
+  private jogarDados(): number {
+    const dado1 = Math.floor(Math.random() * 6) + 1;
+    const dado2 = Math.floor(Math.random() * 6) + 1;
+
+    return dado1 + dado2;
+  }
+
+  private realizarAcaoJogada(jogador: Jogador): EventoMoverCasa {
+    const propriedadeEmQueEstou = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
+    
+    console.log("Estou na propriedade: ", propriedadeEmQueEstou.nome);
+
+    if (propriedadeEmQueEstou instanceof Imovel) {
+
+      if (!propriedadeEmQueEstou.getDono()) {
+        return EventoMoverCasa.ComprarImovel;
+      }
+
+      return EventoMoverCasa.PagarAluguel;
+
+    } else if (propriedadeEmQueEstou instanceof Empresa) {
+      if (!propriedadeEmQueEstou.dono) {
+        return EventoMoverCasa.ComprarEmpresa;
+      }
+
+      return EventoMoverCasa.PagarEmpresa;
+    }
+
+    return EventoMoverCasa.AcaoEspecial;
+  }
+
+  public realizarJogada(jogador: Jogador, dadoManual?: number): {
+    resultado: number;
+    evento: EventoMoverCasa;
+    propriedade: Propriedade;
+  } {
+    // realizar jogada caso que seja um valor inválido ou não ter inserido um valor:
+    let resultado: number;
+
+    if (dadoManual !== undefined && dadoManual >= 2 && dadoManual <= 12) {
+      resultado = dadoManual;
+    } else {
+      resultado = this.jogarDados();
+    }
+
+    const propriedadeAntiga = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
+
+    if (propriedadeAntiga instanceof Imovel || propriedadeAntiga instanceof Empresa) {
+      propriedadeAntiga.removerObservador(jogador);
+    }
+
+    // realizar movimento do jogador:
+    jogador.mover(resultado, this.tabuleiro.getQuantidadePropriedades());
+
+    // verificar a propriedade 
+    const propriedade = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
+
+    if (propriedade instanceof Imovel || propriedade instanceof Empresa) {
+      propriedade.adicionarObservador(jogador);
+    }
+
+    const evento: EventoMoverCasa = this.realizarAcaoJogada(jogador);
+
+    return { resultado, evento, propriedade };
+  }
+
+  public comprarPropriedade(jogador: Jogador, propriedade: Propriedade): void {
+    if (propriedade instanceof Imovel || propriedade instanceof Empresa) {
+      propriedade.setDono(jogador);
+
+      console.log(`${jogador.nome} comprou ${propriedade.nome} por ${propriedade.preco}`);
+      jogador.saldo -= propriedade.preco;
+    }
+  }
+
+  public trocarJogador(jogadorAtual: Jogador): Jogador {
+    return jogadorAtual === this.jogador1 ? this.jogador2 : this.jogador1;
+  }
+
+
 }

@@ -290,102 +290,143 @@ body {
 /* ============================
    Estilização do Tabuleiro
    ============================ */
-   .tabuleiro {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
-    background-color: #f9fafb;
-    border-radius: var(--radius-md);
+.tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: var(--radius-md);
+}
+
+/* Cada propriedade no tabuleiro */
+.propriedade {
+  background-color: white;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.75rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.propriedade:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Cabeçalho da propriedade */
+.propriedade-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.propriedade-posicao {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.propriedade-nome {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0.25rem 0;
+}
+
+/* Detalhes da propriedade */
+.propriedade-detalhes {
+  font-size: 0.85rem;
+  color: #374151;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.propriedade-preco {
+  font-weight: 600;
+  color: var(--color-warning);
+}
+
+.propriedade-aluguel {
+  font-size: 0.8rem;
+  color: var(--color-success);
+}
+
+.propriedade-status {
+  font-style: italic;
+  color: #6b7280;
+}
+
+/* Indicadores dos jogadores presentes na casa */
+.jogadores-presentes {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.jogador-token {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.token-1 {
+  background-color: var(--color-player1);
+}
+
+.token-2 {
+  background-color: var(--color-player2);
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .tabuleiro {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
-  
-  /* Cada propriedade no tabuleiro */
-  .propriedade {
-    background-color: white;
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0.75rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .propriedade:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  /* Cabeçalho da propriedade */
-  .propriedade-header {
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  .propriedade-posicao {
-    font-size: 0.8rem;
-    color: #6b7280;
-  }
-  
-  .propriedade-nome {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1f2937;
-    margin: 0.25rem 0;
-  }
-  
-  /* Detalhes da propriedade */
-  .propriedade-detalhes {
-    font-size: 0.85rem;
-    color: #374151;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-  
-  .propriedade-preco {
-    font-weight: 600;
-    color: var(--color-warning);
-  }
-  
-  .propriedade-aluguel {
-    font-size: 0.8rem;
-    color: var(--color-success);
-  }
-  
-  .propriedade-status {
-    font-style: italic;
-    color: #6b7280;
-  }
-  
-  /* Indicadores dos jogadores presentes na casa */
-  .jogadores-presentes {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-  
-  .jogador-token {
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-  }
-  
-  .token-1 {
-    background-color: var(--color-player1);
-  }
-  
-  .token-2 {
-    background-color: var(--color-player2);
-  }
-  
-  /* Responsividade para telas menores */
-  @media (max-width: 768px) {
-    .tabuleiro {
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
-  }
-  
+}
+
+/* Dice Section */
+.dice-section {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 0;
+}
+
+.dice-input-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1rem;
+}
+
+/* Reaproveitando os estilos de .input-field e .btn btn-primary para manter a consistência */
+.dice-input {
+  flex: 1;
+  width: 100px;
+}
+
+/* Resultado do dado */
+.dice-result {
+  margin-top: 1rem;
+}
+
+.dice-face {
+  background-color: #fff;
+  border: 1px solid #d1d5db;
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+
+.dice-face:hover {
+  box-shadow: var(--shadow-md);
+}

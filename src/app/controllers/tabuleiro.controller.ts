@@ -44,8 +44,10 @@ export class TabuleiroController {
     return dado1 + dado2;
   }
 
-  private realizarAcaoJogada(): EventoMoverCasa {
-    const propriedadeEmQueEstou = this.tabuleiro.getPropriedade(this.jogador1.posicaoAtual);
+  private realizarAcaoJogada(jogador: Jogador): EventoMoverCasa {
+    const propriedadeEmQueEstou = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
+    
+    console.log("Estou na propriedade: ", propriedadeEmQueEstou.nome);
 
     if (propriedadeEmQueEstou instanceof Imovel) {
 
@@ -80,23 +82,32 @@ export class TabuleiroController {
       resultado = this.jogarDados();
     }
 
+    const propriedadeAntiga = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
+
+    if (propriedadeAntiga instanceof Imovel || propriedadeAntiga instanceof Empresa) {
+      propriedadeAntiga.removerObservador(jogador);
+    }
+
     // realizar movimento do jogador:
     jogador.mover(resultado, this.tabuleiro.getQuantidadePropriedades());
 
     // verificar a propriedade 
     const propriedade = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
 
-    const evento: EventoMoverCasa = this.realizarAcaoJogada();
+    if (propriedade instanceof Imovel || propriedade instanceof Empresa) {
+      propriedade.adicionarObservador(jogador);
+    }
+
+    const evento: EventoMoverCasa = this.realizarAcaoJogada(jogador);
 
     return { resultado, evento, propriedade };
   }
 
   public comprarPropriedade(jogador: Jogador, propriedade: Propriedade): void {
-    if (propriedade instanceof Imovel) {
+    if (propriedade instanceof Imovel || propriedade instanceof Empresa) {
       propriedade.setDono(jogador);
-      jogador.saldo -= propriedade.preco;
-    } else if (propriedade instanceof Empresa) {
-      propriedade.dono = jogador;
+
+      console.log(`${jogador.nome} comprou ${propriedade.nome} por ${propriedade.preco}`);
       jogador.saldo -= propriedade.preco;
     }
   }
@@ -104,4 +115,6 @@ export class TabuleiroController {
   public trocarJogador(jogadorAtual: Jogador): Jogador {
     return jogadorAtual === this.jogador1 ? this.jogador2 : this.jogador1;
   }
+
+
 }

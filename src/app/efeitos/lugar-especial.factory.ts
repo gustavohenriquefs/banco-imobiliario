@@ -25,11 +25,11 @@ export enum NomesLugaresEspeciais {
 export class LugarEspecialFactory implements ILugarEspecialFactory {
   public criarLugarEspecial(nome: NomesLugaresEspeciais): LugarEspecial {
     switch (nome) {
-      case "Ponto de Partida":
+      case NomesLugaresEspeciais.PARTIDA:
         return new LugarEspecial(nome, new EfeitoPartida());
-      case "Imposto de Renda":
+      case NomesLugaresEspeciais.IMPOSTO:
         return new LugarEspecial(nome, new EfeitoImposto());
-      case "Vá para a Prisão":
+      case NomesLugaresEspeciais.PRISAO:
         return new LugarEspecial(nome, new EfeitoPrisao());
       case NomesLugaresEspeciais.VA_PARA_OUTRA_CASA:
         return new LugarEspecial(nome, new EfeitoVaParaOutraCasa(
@@ -41,8 +41,8 @@ export class LugarEspecialFactory implements ILugarEspecialFactory {
         ));
       case NomesLugaresEspeciais.IMPOSTO_PROGRESSIVO:
         return new LugarEspecial(nome, new EfeitoImpostoProgressivo(
-          50,
-          200
+          10,
+          5
         ));
       case NomesLugaresEspeciais.VOLTE_X_CASAS:
         return new LugarEspecial(nome, new EfeitoVolteXCasas(

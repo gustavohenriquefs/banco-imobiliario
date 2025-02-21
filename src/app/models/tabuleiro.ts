@@ -78,8 +78,6 @@ export class Tabuleiro {
     ));
 
     this._propriedades.push(new Imovel("Rua do Comércio", 500, null, 125));
-
-    console.log(this._propriedades);
   }
 
   public getPropriedades(): Propriedade[] {

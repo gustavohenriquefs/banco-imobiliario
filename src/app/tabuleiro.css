@@ -430,3 +430,35 @@ body {
 .dice-face:hover {
   box-shadow: var(--shadow-md);
 }
+
+.btn-comprar {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  background-color: var(--color-success);
+  color: white;
+}
+
+.btn-comprar:hover {
+  background-color: #047857;
+}
+
+.btn-comprar:disabled {
+  background-color: #6ee7b7;
+  cursor: not-allowed;
+}
+
+.btn-recusar {
+  background-color: #ef4444;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.btn-recusar:hover {
+  background-color: #c53030;
+}
+
+.btn-recusar:disabled {
+  background-color: #fca5a5;
+  cursor: not-allowed;
+}

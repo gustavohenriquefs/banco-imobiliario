@@ -12,25 +12,29 @@ export class Jogador implements Observador {
   ) { }
 
   atualizar(imovel: ISujeitoObservavel): void {
-    const aluguel: number = imovel.getValorAluguel();
+    const aluguel: number = imovel.getValorQuestao();
+  
+    if(!imovel.getDono())  return;
 
     if (imovel.getDono() === this) {
       this.saldo += aluguel;
+
+      console.log(`Jogador ${this.nome} recebeu aluguel de ${aluguel}`);
     } else {
       this.saldo -= aluguel;
+
+      console.log(`Jogador ${this.nome} pagou aluguel de ${aluguel} para o jogador ${imovel.getDono()?.nome}`);
     }
   }
 
-  mover(casas: number, tamanhoTabuleiro: number): void {
-    if (casas + this.posicaoAtual >= tamanhoTabuleiro) {
+  mover(somaDados: number, tamanhoTabuleiro: number): void {
+    if (somaDados + this.posicaoAtual >= tamanhoTabuleiro) {
       this.saldo += BONUS_PASSAGEM;
     }
 
-    this.posicaoAtual = (this.posicaoAtual + casas) % tamanhoTabuleiro;
-  }
+    console.log(`Jogador ${this.nome} está na posição ${this.posicaoAtual} e tirou ${somaDados} nos dados`);
 
-  private comprarPropriedade(valor: number): void {
-    this.saldo -= valor;
+    this.posicaoAtual = (this.posicaoAtual + somaDados) % tamanhoTabuleiro;
   }
 
   pagar(valor: number, destinatario: Jogador | null): void {

@@ -5,7 +5,7 @@ import { Propriedade } from "./propriedade";
 
 export class Imovel extends Propriedade implements ISujeitoObservavel {
   private observadores: Observador[] = [];
-  
+
   constructor(
     public nome: string,
     public preco: number,
@@ -15,19 +15,28 @@ export class Imovel extends Propriedade implements ISujeitoObservavel {
     super(nome, preco);
   }
 
-  getValorAluguel(): number {
+  getValorQuestao(): number {
     return this.aluguelBase;
   }
-  
+
   adicionarObservador(observador: Observador): void {
     this.observadores.push(observador);
+    console.log("jogador ", observador, " foi adicionado na lista de observadores");
+
+    this.notificarObservadores();
   }
 
   removerObservador(observador: Observador): void {
-    this.observadores = this.observadores.filter(o => o !== observador);
+    if (observador != this.dono) {
+      this.observadores = this.observadores.filter(o => o !== observador);
+      console.log("jogador " + observador + " foi removido da lista de observadores");
+    }
   }
 
   notificarObservadores(): void {
+    console.log("Executar notificação: ",
+      this.observadores.length
+    )
     this.observadores.forEach(observador => observador.atualizar(this));
   }
 

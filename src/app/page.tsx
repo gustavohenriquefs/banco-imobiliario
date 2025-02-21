@@ -11,6 +11,7 @@ import { PlayerCard } from './player-card';
 import { DiceSection } from './dice-section';
 import { ComprarModal } from './comprar-modal';
 import { Tabuleiro } from './tabuleiro';
+import { LugarEspecial } from './models/lugar-especial';
 
 export default function Home() {
   const [controller] = useState<TabuleiroController>(new TabuleiroController());
@@ -29,7 +30,9 @@ export default function Home() {
 
   const iniciarJogo = (jogador1Nome: string, jogador2Nome: string) => {
     controller.criarJogadores(jogador1Nome, jogador2Nome);
+
     setJogoIniciado(true);
+
     setJogadorAtual(controller.getJogadores().jogador1);
   };
 
@@ -39,26 +42,49 @@ export default function Home() {
 
   const jogarDado = () => {
     if (!jogadorAtual) return;
+
     const { resultado, evento, propriedade } = controller.realizarJogada(
       jogadorAtual,
       dadoManual ? parseInt(dadoManual) : undefined
     );
+
+    // atualizar estados da interface
     setResultadoDado(resultado);
     setUltimoEvento(evento);
     setPropriedadeAtual(propriedade);
     setDadoManual('');
+
+    console.log("Evento: ", evento);
+
+    // se o evento for de compra, mostrar modal
     if (evento === EventoMoverCasa.ComprarImovel || evento === EventoMoverCasa.ComprarEmpresa) {
       setMostrarCompra(true);
-    } else {
+    } else if (evento === EventoMoverCasa.PagarAluguel) {
+      // aluguel já foi descontado do saldo do jogador atual
+      
+      const novoJogador = controller.trocarJogador(jogadorAtual);
+      setJogadorAtual(novoJogador);
+    } else if (evento === EventoMoverCasa.PagarEmpresa) {
+      // imposto já foi descontado do saldo do jogador atual (TODO: implementar)
+
+      const novoJogador = controller.trocarJogador(jogadorAtual);
+      setJogadorAtual(novoJogador);
+    } else if (evento === EventoMoverCasa.AcaoEspecial) {
+      // executar ação especial
+      (propriedade as LugarEspecial).ativarEfeito(jogadorAtual);
+
       const novoJogador = controller.trocarJogador(jogadorAtual);
       setJogadorAtual(novoJogador);
     }
+
   };
 
   const comprarPropriedade = () => {
     if (jogadorAtual && propriedadeAtual) {
+
       controller.comprarPropriedade(jogadorAtual, propriedadeAtual);
       setMostrarCompra(false);
+
       const novoJogador = controller.trocarJogador(jogadorAtual);
       setJogadorAtual(novoJogador);
     }

@@ -3,9 +3,6 @@ import { Imovel } from '../models/imovel';
 import { Empresa } from '../models/empresa';
 import { Jogador } from '../models/jogador';
 import { Tabuleiro } from '../models/tabuleiro';
-import { LugarEspecial } from '../models/lugar-especial';
-
-
 
 export enum EventoMoverCasa {
   ComprarImovel = "Comprar Imóvel",
@@ -48,7 +45,7 @@ export class TabuleiroController {
 
   private realizarAcaoJogada(jogador: Jogador): EventoMoverCasa {
     const propriedadeEmQueEstou = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
-    
+
     console.log("Estou na propriedade: ", propriedadeEmQueEstou.nome);
 
     if (propriedadeEmQueEstou instanceof Imovel) {
@@ -118,5 +115,9 @@ export class TabuleiroController {
     return jogadorAtual === this.jogador1 ? this.jogador2 : this.jogador1;
   }
 
-
+  public reiniciarJogo(): void {
+    this.tabuleiro.reiniciarTabuleiro();
+    this.jogador1.reiniciarJogador();
+    this.jogador2.reiniciarJogador();
+  }
 }

@@ -54,14 +54,12 @@ export default function Home() {
     setPropriedadeAtual(propriedade);
     setDadoManual('');
 
-    console.log("Evento: ", evento);
-
     // se o evento for de compra, mostrar modal
     if (evento === EventoMoverCasa.ComprarImovel || evento === EventoMoverCasa.ComprarEmpresa) {
       setMostrarCompra(true);
     } else if (evento === EventoMoverCasa.PagarAluguel) {
       // aluguel já foi descontado do saldo do jogador atual
-      
+
       const novoJogador = controller.trocarJogador(jogadorAtual);
       setJogadorAtual(novoJogador);
     } else if (evento === EventoMoverCasa.PagarEmpresa) {
@@ -77,6 +75,13 @@ export default function Home() {
       setJogadorAtual(novoJogador);
     }
 
+    if (jogadorAtual.saldo < 0) {
+      alert(`O jogador ${jogadorAtual.nome} faliu!`);
+
+      controller.reiniciarJogo();
+
+      setJogoIniciado(false);
+    }
   };
 
   const comprarPropriedade = () => {

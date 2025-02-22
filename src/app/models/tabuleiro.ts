@@ -27,68 +27,65 @@ export class Tabuleiro {
       NomesLugaresEspeciais.PARTIDA
     ));
 
-    this._propriedades.push(new Imovel("Av. Brasil", 200, null, 50));
+    this._propriedades.push(new Imovel("Av. Brasil", 150, null, 50));
 
     this._propriedades.push(new Empresa("Companhia de Eletricidade", 150, 50));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.IMPOSTO
-    ));
-
-    this._propriedades.push(new Imovel("Av. Paulista", 350, null, 100));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.VA_PARA_OUTRA_CASA
-    ));
-
-    this._propriedades.push(new Empresa("Companhia de Água", 150, 50));
-
-    this._propriedades.push(new Imovel("Av. Atlântica", 400, null, 150));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.BONUS
-    ));
-
-    this._propriedades.push(new Empresa("Companhia de Transporte", 200, 75));
-
-    this._propriedades.push(new Imovel("Av. Copacabana", 250, null, 75));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.PRISAO
-    ));
-
-    this._propriedades.push(new Imovel("Rua Augusta", 300, null, 90));
-
-    this._propriedades.push(new Empresa("Companhia de Internet", 220, 80));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.IMPOSTO_PROGRESSIVO
-    ));
-
-    this._propriedades.push(new Imovel("Rua das Flores", 280, null, 85));
-
-    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
-      NomesLugaresEspeciais.VOLTE_X_CASAS
-    ));
-
-    this._propriedades.push(new Empresa("Companhia de Telefonia", 180, 65));
-
-    this._propriedades.push(new Imovel("Rua Bela Vista", 320, null, 95));
 
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.PERDA_SALDO
     ));
 
-    this._propriedades.push(new Imovel("Rua Ouro Preto", 350, null, 105));
+    this._propriedades.push(new Imovel("Av. Paulista", 300, null, 80));
 
-    this._propriedades.push(new Empresa("Companhia de Publicidade", 250, 90));
+    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
+      NomesLugaresEspeciais.IMPOSTO_PROGRESSIVO
+    ));
+
+    this._propriedades.push(new Empresa("Companhia de Água", 200, 50));
+
+    this._propriedades.push(new Imovel("Av. Atlântica", 400, null, 120));
+
+    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
+      NomesLugaresEspeciais.BONUS
+    ));
+
+    this._propriedades.push(new Empresa("Companhia de Transporte", 250, 75));
+
+    this._propriedades.push(new Imovel("Av. Copacabana", 200, null, 50));
+
+    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
+      NomesLugaresEspeciais.VOLTE_X_CASAS
+    ));
+
+    this._propriedades.push(new Imovel("Rua Augusta", 500, null, 150));
+
+    this._propriedades.push(new Empresa("Companhia de Internet", 300, 100));
+
+    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
+      NomesLugaresEspeciais.IMPOSTO
+    ));
+
+    this._propriedades.push(new Imovel("Rua das Flores", 350, null, 90));
+
+    this._propriedades.push(new Empresa("Companhia de Telefonia", 350, 100));
+
+    this._propriedades.push(new Imovel("Rua Bela Vista", 600, null, 180));
+
+    this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
+      NomesLugaresEspeciais.PERDA_SALDO
+    ));
+
+    this._propriedades.push(new Imovel("Rua Ouro Preto", 250, null, 70));
+
+    this._propriedades.push(new Empresa("Companhia de Publicidade", 220, 80));
 
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.AVANCE_PARA_PARTIDA
     ));
-  
-    this._propriedades.push(new Imovel("Rua do Comércio", 500, null, 125));
+
+    this._propriedades.push(new Imovel("Rua do Comércio", 600, null, 150));
     this._inicializado = true;
+
   }
 
   public getPropriedades(): Propriedade[] {
@@ -101,5 +98,12 @@ export class Tabuleiro {
 
   public getQuantidadePropriedades(): number {
     return this._propriedades.length;
+  }
+
+  public reiniciarTabuleiro(): void {
+    this._propriedades = [];
+    this._inicializado = false;
+
+    this.iniciarTabuleiro();
   }
 }

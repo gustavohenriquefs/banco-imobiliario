@@ -5,7 +5,6 @@ import { EfeitoImposto } from "./efeito-imposto";
 import { EfeitoImpostoProgressivo } from "./efeito-imposto-progressivo";
 import { EfeitoPartida } from "./efeito-partida";
 import { EfeitoPerdaSaldo } from "./efeito-perda-saldo";
-import { EfeitoPrisao } from "./efeito-prisao";
 import { EfeitoVaParaOutraCasa } from "./efeito-va-para-outra-casa";
 import { EfeitoVolteXCasas } from "./efeito-volte-x-casas";
 import { ILugarEspecialFactory } from "./lugar-especial.factory.interface";
@@ -13,7 +12,6 @@ import { ILugarEspecialFactory } from "./lugar-especial.factory.interface";
 export enum NomesLugaresEspeciais {
   PARTIDA = "Ponto de Partida",
   IMPOSTO = "Imposto de Renda",
-  PRISAO = "Vá para a Prisão",
   VA_PARA_OUTRA_CASA = "Vá para outra casa",
   BONUS = "Bônus",
   IMPOSTO_PROGRESSIVO = "Imposto Progressivo",
@@ -29,8 +27,6 @@ export class LugarEspecialFactory implements ILugarEspecialFactory {
         return new LugarEspecial(nome, new EfeitoPartida());
       case NomesLugaresEspeciais.IMPOSTO:
         return new LugarEspecial(nome, new EfeitoImposto());
-      case NomesLugaresEspeciais.PRISAO:
-        return new LugarEspecial(nome, new EfeitoPrisao());
       case NomesLugaresEspeciais.VA_PARA_OUTRA_CASA:
         return new LugarEspecial(nome, new EfeitoVaParaOutraCasa(
           0

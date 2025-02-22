@@ -13,8 +13,8 @@ export class Jogador implements Observador {
 
   atualizar(imovel: ISujeitoObservavel): void {
     const aluguel: number = imovel.getValorQuestao();
-  
-    if(!imovel.getDono())  return;
+
+    if (!imovel.getDono()) return;
 
     if (imovel.getDono() === this) {
       this.saldo += aluguel;
@@ -42,5 +42,10 @@ export class Jogador implements Observador {
       this.saldo -= valor;
       if (destinatario) destinatario.saldo += valor;
     }
+  }
+
+  public reiniciarJogador(): void {
+    this.saldo = SALDO_INICIAL;
+    this.posicaoAtual = POSICAO_INICIAL;
   }
 }

@@ -1,4 +1,4 @@
-import { Propriedade } from "../models/propriedade";
+import { IPropriedade } from "../models/propriedade";
 import { Imovel } from '../models/imovel';
 import { Empresa } from '../models/empresa';
 import { Jogador } from '../models/jogador';
@@ -32,7 +32,7 @@ export class TabuleiroController {
     return { jogador1: this.jogador1, jogador2: this.jogador2 };
   }
 
-  public getPropriedades(): Propriedade[] {
+  public getPropriedades(): IPropriedade[] {
     return this.tabuleiro.getPropriedades();
   }
 
@@ -75,7 +75,7 @@ export class TabuleiroController {
   public realizarJogada(jogador: Jogador, dadoManual?: number): {
     resultado: number;
     evento: EventoMoverCasa;
-    propriedade: Propriedade;
+    propriedade: IPropriedade;
   } {
     // realizar jogada caso que seja um valor inválido ou não ter inserido um valor:
     let resultado: number;
@@ -109,7 +109,7 @@ export class TabuleiroController {
     return { resultado, evento, propriedade };
   }
 
-  public comprarPropriedade(jogador: Jogador, propriedade: Propriedade): void {
+  public comprarPropriedade(jogador: Jogador, propriedade: IPropriedade): void {
     if (propriedade instanceof Imovel || propriedade instanceof Empresa) {
       propriedade.setDono(jogador);
 

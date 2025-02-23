@@ -1,3 +1,3 @@
-export interface Propriedade {
+export interface IPropriedade {
   nome: string;
 }

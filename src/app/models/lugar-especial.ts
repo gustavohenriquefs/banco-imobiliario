@@ -1,9 +1,9 @@
 
 import { IEfeitoEspecial } from "../efeitos/efeito-especial";
 import { Jogador } from "./jogador";
-import { Propriedade } from "./propriedade";
+import { IPropriedade } from "./propriedade";
 
-export class LugarEspecial implements Propriedade {
+export class LugarEspecial implements IPropriedade {
   constructor(
     public nome: string,
     private efeito: IEfeitoEspecial
@@ -17,4 +17,4 @@ export class LugarEspecial implements Propriedade {
     console.log(`🚀 ${jogador.nome} caiu em ${this.nome}!`);
     this.efeito.aplicar(jogador);
   }
-}
+} 

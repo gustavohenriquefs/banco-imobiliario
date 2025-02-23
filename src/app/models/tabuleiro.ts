@@ -2,10 +2,10 @@ import { LugarEspecialFactory, NomesLugaresEspeciais } from "../efeitos/lugar-es
 import { ILugarEspecialFactory } from "../efeitos/lugar-especial.factory.interface";
 import { Empresa } from "./empresa";
 import { Imovel } from "./imovel";
-import { Propriedade } from "./propriedade";
+import { IPropriedade } from "./propriedade";
 
 export class Tabuleiro {
-  private _propriedades: Propriedade[] = [];
+  private _propriedades: IPropriedade[] = [];
   private _lugarEspecialFactory: ILugarEspecialFactory;
   private _inicializado: boolean = false;
   private static instance: Tabuleiro;
@@ -88,11 +88,11 @@ export class Tabuleiro {
 
   }
 
-  public getPropriedades(): Propriedade[] {
+  public getPropriedades(): IPropriedade[] {
     return this._propriedades;
   }
 
-  public getPropriedade(index: number): Propriedade {
+  public getPropriedade(index: number): IPropriedade {
     return this._propriedades[index];
   }
 

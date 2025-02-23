@@ -1,9 +1,9 @@
 import { Observador } from "../observador/observador";
 import { ISujeitoObservavel } from "../observador/sujeito-observavel.interface";
 import { Jogador } from "./jogador";
-import { Propriedade } from "./propriedade";
+import { IPropriedade } from "./propriedade";
 
-export class Empresa implements Propriedade, ISujeitoObservavel {
+export class Empresa implements IPropriedade, ISujeitoObservavel {
   private observadores: Observador[] = [];
 
   constructor(

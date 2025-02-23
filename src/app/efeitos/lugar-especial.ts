@@ -1,8 +1,8 @@
 import { Jogador } from "../models/jogador";
-import { Propriedade } from "../models/propriedade";
+import { IPropriedade } from "../models/propriedade";
 import { IEfeitoEspecial } from "./efeito-especial";
 
-export class LugarEspecial implements Propriedade {
+export class LugarEspecial implements IPropriedade {
   constructor(
     public nome: string,
     public lugarEfeitoEspecial: IEfeitoEspecial

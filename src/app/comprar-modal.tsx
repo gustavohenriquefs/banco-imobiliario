@@ -1,9 +1,9 @@
 // ComprarModal.tsx
 import React from 'react';
-import { Propriedade } from './models/propriedade';
+import { IPropriedade } from './models/propriedade';
 
 interface ComprarModalProps {
-  propriedade: Propriedade;
+  propriedade: IPropriedade;
   onComprar: () => void;
   onRecusar: () => void;
   jogadorSaldo: number;

@@ -4,7 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import './tabuleiro.css';
 import { TabuleiroController, EventoMoverCasa } from './controllers/tabuleiro.controller';
-import { Propriedade } from './models/propriedade';
+import { IPropriedade } from './models/propriedade';
 import { Jogador } from './models/jogador';
 import { SetupForm } from './setup-form';
 import { PlayerCard } from './player-card';
@@ -15,13 +15,13 @@ import { LugarEspecial } from './models/lugar-especial';
 
 export default function Home() {
   const [controller] = useState<TabuleiroController>(new TabuleiroController());
-  const [propriedades, setPropriedades] = useState<Propriedade[]>([]);
+  const [propriedades, setPropriedades] = useState<IPropriedade[]>([]);
   const [jogoIniciado, setJogoIniciado] = useState<boolean>(false);
   const [jogadorAtual, setJogadorAtual] = useState<Jogador | null>(null);
   const [ultimoEvento, setUltimoEvento] = useState<string>('');
   const [resultadoDado, setResultadoDado] = useState<number>(0);
   const [mostrarCompra, setMostrarCompra] = useState<boolean>(false);
-  const [propriedadeAtual, setPropriedadeAtual] = useState<Propriedade | null>(null);
+  const [propriedadeAtual, setPropriedadeAtual] = useState<IPropriedade | null>(null);
   const [dadoManual, setDadoManual] = useState<string>('');
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function Home() {
 
   const jogarDado = () => {
     if (!jogadorAtual) return;
-    
+
     const { resultado, evento, propriedade } = controller.realizarJogada(
       jogadorAtual,
       dadoManual ? parseInt(dadoManual) : undefined

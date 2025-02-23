@@ -1,12 +1,12 @@
 // Tabuleiro.tsx
 import React from 'react';
-import { Propriedade } from './models/propriedade';
+import { IPropriedade } from './models/propriedade';
 import { Imovel } from './models/imovel';
 import { Empresa } from './models/empresa';
 import { Jogador } from './models/jogador';
 
 interface TabuleiroProps {
-  propriedades: Propriedade[];
+  propriedades: IPropriedade[];
   jogadores: { jogador1: Jogador; jogador2: Jogador };
 }
 

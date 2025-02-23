@@ -3,13 +3,11 @@ import { IEfeitoEspecial } from "../efeitos/efeito-especial";
 import { Jogador } from "./jogador";
 import { Propriedade } from "./propriedade";
 
-export class LugarEspecial extends Propriedade {
+export class LugarEspecial implements Propriedade {
   constructor(
     public nome: string,
     private efeito: IEfeitoEspecial
-  ) {
-    super(nome, 0);
-  }
+  ) { }
 
   calcularAluguel(): number {
     return 0;

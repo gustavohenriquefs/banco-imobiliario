@@ -29,7 +29,7 @@ export class Tabuleiro {
 
     this._propriedades.push(new Imovel("Av. Brasil", 150, null, 50));
 
-    this._propriedades.push(new Empresa("Companhia de Eletricidade", 150, 50));
+    this._propriedades.push(new Empresa("Companhia de Eletricidade", 150, 0.5));
 
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.PERDA_SALDO
@@ -41,7 +41,7 @@ export class Tabuleiro {
       NomesLugaresEspeciais.IMPOSTO_PROGRESSIVO
     ));
 
-    this._propriedades.push(new Empresa("Companhia de Água", 200, 50));
+    this._propriedades.push(new Empresa("Companhia de Água", 200, 0.05));
 
     this._propriedades.push(new Imovel("Av. Atlântica", 400, null, 120));
 
@@ -49,7 +49,7 @@ export class Tabuleiro {
       NomesLugaresEspeciais.BONUS
     ));
 
-    this._propriedades.push(new Empresa("Companhia de Transporte", 250, 75));
+    this._propriedades.push(new Empresa("Companhia de Transporte", 250, 0.04));
 
     this._propriedades.push(new Imovel("Av. Copacabana", 200, null, 50));
 
@@ -59,7 +59,7 @@ export class Tabuleiro {
 
     this._propriedades.push(new Imovel("Rua Augusta", 500, null, 150));
 
-    this._propriedades.push(new Empresa("Companhia de Internet", 300, 100));
+    this._propriedades.push(new Empresa("Companhia de Internet", 300, 0.075));
 
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.IMPOSTO
@@ -67,7 +67,7 @@ export class Tabuleiro {
 
     this._propriedades.push(new Imovel("Rua das Flores", 350, null, 90));
 
-    this._propriedades.push(new Empresa("Companhia de Telefonia", 350, 100));
+    this._propriedades.push(new Empresa("Companhia de Telefonia", 350, 0.05));
 
     this._propriedades.push(new Imovel("Rua Bela Vista", 600, null, 180));
 
@@ -77,13 +77,13 @@ export class Tabuleiro {
 
     this._propriedades.push(new Imovel("Rua Ouro Preto", 250, null, 70));
 
-    this._propriedades.push(new Empresa("Companhia de Publicidade", 220, 80));
+    this._propriedades.push(new Empresa("Companhia de Publicidade", 1020, 0.15));
 
     this._propriedades.push(this._lugarEspecialFactory.criarLugarEspecial(
       NomesLugaresEspeciais.AVANCE_PARA_PARTIDA
     ));
 
-    this._propriedades.push(new Imovel("Rua do Comércio", 600, null, 150));
+    this._propriedades.push(new Imovel("Rua do Comércio", 1600, null, 150));
     this._inicializado = true;
 
   }

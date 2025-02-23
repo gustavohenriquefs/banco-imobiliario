@@ -43,6 +43,11 @@ export class TabuleiroController {
     return dado1 + dado2;
   }
 
+  setSomaDados(somaDados: number): void {
+    this.jogador1.setSomaDadosRodada(somaDados);
+    this.jogador2.setSomaDadosRodada(somaDados);
+  }
+
   private realizarAcaoJogada(jogador: Jogador): EventoMoverCasa {
     const propriedadeEmQueEstou = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
 
@@ -80,6 +85,8 @@ export class TabuleiroController {
     } else {
       resultado = this.jogarDados();
     }
+
+    this.setSomaDados(resultado);
 
     const propriedadeAntiga = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
 

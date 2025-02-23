@@ -5,5 +5,6 @@ export class EfeitoImpostoProgressivo {
 
   aplicar(jogador: Jogador): void {
     jogador.saldo -= this.valorBase + this.valorPorCasa * jogador.posicaoAtual;
+    console.log(`🏠 ${jogador.nome} caiu no Imposto Progressivo! Perdeu R$${this.valorBase + this.valorPorCasa * jogador.posicaoAtual}`);
   }
 }

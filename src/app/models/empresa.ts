@@ -3,7 +3,7 @@ import { ISujeitoObservavel } from "../observador/sujeito-observavel.interface";
 import { Jogador } from "./jogador";
 import { Propriedade } from "./propriedade";
 
-export class Empresa extends Propriedade implements ISujeitoObservavel {
+export class Empresa implements Propriedade, ISujeitoObservavel {
   private observadores: Observador[] = [];
 
   constructor(
@@ -11,17 +11,15 @@ export class Empresa extends Propriedade implements ISujeitoObservavel {
     public preco: number,
     private multiplicador: number,
     public dono: Jogador | null = null,
-  ) {
-    super(nome, preco);
-  }
+  ) {}
 
-  getValorQuestao(): number {
-    this.multiplicador = Math.floor(Math.random() * 10) + 1;
-    return this.multiplicador;
+  getValorQuestao(somaDados: number): number {
+    return somaDados * this.multiplicador * this.preco;
   }
 
   adicionarObservador(observador: Observador): void {
-    if(observador == this.dono){return;}
+    if (observador == this.dono) { return; }
+
     this.observadores.push(observador);
 
     console.log("jogador " + observador + " foi adicionado na lista de observadores");
@@ -41,10 +39,6 @@ export class Empresa extends Propriedade implements ISujeitoObservavel {
       this.observadores.length
     )
     this.observadores.forEach(observador => observador.atualizar(this));
-  }
-
-  calcularAluguel(): number {
-    return this.preco * this.multiplicador;
   }
 
   setDono(dono: Jogador): void {

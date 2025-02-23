@@ -42,7 +42,7 @@ export default function Home() {
 
   const jogarDado = () => {
     if (!jogadorAtual) return;
-
+    
     const { resultado, evento, propriedade } = controller.realizarJogada(
       jogadorAtual,
       dadoManual ? parseInt(dadoManual) : undefined

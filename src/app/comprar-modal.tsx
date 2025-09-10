@@ -20,13 +20,13 @@ export function ComprarModal({
         <h3>Deseja comprar esta propriedade?</h3>
         <div className="propriedade-card">
           <h4>{propriedade.nome}</h4>
-          <div className="card-price">R$ {propriedade.preco}</div>
+          <div className="card-price">R$ {propriedade.preco || 0}</div>
         </div>
         <div className="modal-actions">
           <button
             className="btn-comprar"
             onClick={onComprar}
-            disabled={jogadorSaldo < propriedade.preco}
+            disabled={jogadorSaldo < (propriedade.preco || 0)}
           >
             Comprar
           </button>

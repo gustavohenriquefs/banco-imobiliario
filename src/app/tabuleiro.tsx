@@ -1,4 +1,3 @@
-// Tabuleiro.tsx
 import React from 'react';
 import { IPropriedade } from './models/propriedade';
 import { Imovel } from './models/imovel';

@@ -1,4 +1,3 @@
-// PlayerCard.tsx
 import React from 'react';
 import { Jogador } from './models/jogador';
 

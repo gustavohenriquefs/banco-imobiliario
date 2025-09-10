@@ -1,4 +1,3 @@
-/* tabuleiro.css */
 :root {
   --color-primary: #2563eb;
   --color-secondary: #dbeafe;
@@ -48,7 +47,6 @@ body {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Setup Screen */
 .setup-container {
   display: flex;
   justify-content: center;
@@ -125,14 +123,12 @@ body {
   cursor: not-allowed;
 }
 
-/* Game Layout */
 .game-layout {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 1.5rem;
 }
 
-/* Sidebar */
 .sidebar {
   display: flex;
   flex-direction: column;
@@ -299,7 +295,6 @@ body {
   border-radius: var(--radius-md);
 }
 
-/* Cada propriedade no tabuleiro */
 .propriedade {
   background-color: white;
   border-radius: var(--radius-md);
@@ -317,7 +312,6 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-/* Cabeçalho da propriedade */
 .propriedade-header {
   text-align: center;
   margin-bottom: 0.5rem;
@@ -335,7 +329,6 @@ body {
   margin: 0.25rem 0;
 }
 
-/* Detalhes da propriedade */
 .propriedade-detalhes {
   font-size: 0.85rem;
   color: #374151;
@@ -360,7 +353,6 @@ body {
   color: #6b7280;
 }
 
-/* Indicadores dos jogadores presentes na casa */
 .jogadores-presentes {
   display: flex;
   justify-content: center;
@@ -382,14 +374,12 @@ body {
   background-color: var(--color-player2);
 }
 
-/* Responsividade para telas menores */
 @media (max-width: 768px) {
   .tabuleiro {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
 
-/* Dice Section */
 .dice-section {
   display: flex;
   flex-direction: column;
@@ -405,13 +395,11 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Reaproveitando os estilos de .input-field e .btn btn-primary para manter a consistência */
 .dice-input {
   flex: 1;
   width: 100px;
 }
 
-/* Resultado do dado */
 .dice-result {
   margin-top: 1rem;
 }
@@ -463,7 +451,6 @@ body {
   cursor: not-allowed;
 }
 
-/* Modal de Compra */
 .comprar-modal {
   position: fixed;
   top: 0;
@@ -583,7 +570,6 @@ body {
   transform: none;
 }
 
-/* Responsividade */
 @media (max-width: 576px) {
   .modal-content {
     padding: 1.5rem;

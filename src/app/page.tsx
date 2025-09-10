@@ -1,4 +1,3 @@
-// Home.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -48,27 +47,20 @@ export default function Home() {
       dadoManual ? parseInt(dadoManual) : undefined
     );
 
-    // atualizar estados da interface
     setResultadoDado(resultado);
     setUltimoEvento(evento);
     setPropriedadeAtual(propriedade);
     setDadoManual('');
 
-    // se o evento for de compra, mostrar modal
     if (evento === EventoMoverCasa.ComprarImovel || evento === EventoMoverCasa.ComprarEmpresa) {
       setMostrarCompra(true);
     } else if (evento === EventoMoverCasa.PagarAluguel) {
-      // aluguel já foi descontado do saldo do jogador atual
-
       const novoJogador = controller.trocarJogador(jogadorAtual);
       setJogadorAtual(novoJogador);
     } else if (evento === EventoMoverCasa.PagarEmpresa) {
-      // imposto já foi descontado do saldo do jogador atual (TODO: implementar)
-
       const novoJogador = controller.trocarJogador(jogadorAtual);
       setJogadorAtual(novoJogador);
     } else if (evento === EventoMoverCasa.AcaoEspecial) {
-      // executar ação especial
       (propriedade as LugarEspecial).ativarEfeito(jogadorAtual);
 
       const novoJogador = controller.trocarJogador(jogadorAtual);

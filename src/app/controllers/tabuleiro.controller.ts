@@ -77,7 +77,6 @@ export class TabuleiroController {
     evento: EventoMoverCasa;
     propriedade: IPropriedade;
   } {
-    // realizar jogada caso que seja um valor inválido ou não ter inserido um valor:
     let resultado: number;
 
     if (dadoManual !== undefined && dadoManual >= 2 && dadoManual <= 12) {
@@ -94,10 +93,8 @@ export class TabuleiroController {
       propriedadeAntiga.removerObservador(jogador);
     }
 
-    // realizar movimento do jogador:
     jogador.mover(resultado, this.tabuleiro.getQuantidadePropriedades());
 
-    // verificar a propriedade 
     const propriedade = this.tabuleiro.getPropriedade(jogador.posicaoAtual);
 
     if (propriedade instanceof Imovel || propriedade instanceof Empresa) {

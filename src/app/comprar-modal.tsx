@@ -1,4 +1,3 @@
-// ComprarModal.tsx
 import React from 'react';
 import { IPropriedade } from './models/propriedade';
 
